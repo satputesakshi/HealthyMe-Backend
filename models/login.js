@@ -5,11 +5,11 @@ const loginSchema = mongoose.Schema(
   {
     cust_id: {
       type: String,
-      required: true,
+      required: false,
     },
     loginId: {
       type: String,
-      required: true,
+      required: false,
     },
     custType: {
       type: String,
@@ -25,7 +25,7 @@ const loginSchema = mongoose.Schema(
     },
     otp: {
       type: String,
-      required: true,
+      required: false,
     },
     loginStatus: {
       type: String,
@@ -38,16 +38,16 @@ const loginSchema = mongoose.Schema(
 );
 
 loginSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
+  if (!this.isModified("pwd")) {
     next();
   }
 
   const salt = await bcrypt.genSalt(9);
-  this.password = await bcrypt.hash(this.password, salt);
+  this.pwd = await bcrypt.hash(this.pwd, salt);
 });
 
 loginSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
+  return await bcrypt.compare(enteredPassword, this.pwd);
 };
 
 const Login = mongoose.model("Login", loginSchema);
