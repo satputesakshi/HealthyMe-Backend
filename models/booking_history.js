@@ -10,30 +10,18 @@ const booking_historySchema = mongoose.Schema(
       type: String,
       required: true,
     },
-
     date: {
-      type: String,
-      required: true,
-    },
-    time: {
-      type: String,
-      required: true,
-    },
-    appointment_no: {
-      type: String,
+      type: Date,
       required: true,
     },
     status: {
       type: String,
-      required: true,
     },
     patient_remarks: {
       type: String,
-      required: true,
     },
     clinic_remarks: {
       type: String,
-      required: true,
     },
   },
   {

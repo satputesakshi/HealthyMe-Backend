@@ -2,19 +2,19 @@ const mongoose = require("mongoose");
 
 const feedbackSchema = mongoose.Schema(
   {
-    doctor_id: {
+    doctorid: {
       type: String,
       required: true,
     },
-    service_type: {
+    servicetype: {
       type: String,
       required: true,
     },
-    reg_date: {
+    feedback: {
       type: String,
       required: true,
     },
-    status: {
+    doctorname: {
       type: String,
       required: true,
     },

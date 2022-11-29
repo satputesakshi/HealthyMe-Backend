@@ -4,6 +4,7 @@ const Patient = require("../models/patient");
 const Login = require("../models/login");
 const asyncHandler = require("express-async-handler");
 const { response } = require("express");
+const Feedback = require("../models/feedback");
 
 const addUser = asyncHandler(async (req, res) => {
   const { cust_id, loginId, custType, email, pwd, loginStatus } = req.body;
@@ -62,7 +63,37 @@ const login = asyncHandler(async (req, res) => {
     );
   }
 });
+const sendfeedback = asyncHandler(async (req, res) => {
+  const {  feedback,
+    doctorname,
+    doctorid,
+    servicetype } = req.body;
+
+  const feedbackData = await Feedback.create({
+    feedback,
+    doctorname,
+    doctorid,
+    servicetype
+  });
+  if (feedbackData) {
+    res.status(201).json({
+      feedback : feedbackData.feedback,
+    doctorname: feedbackData.doctorname,
+    doctorid: feedbackData.doctorid,
+    servicetype: feedbackData.servicetype,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Error addding feedback");
+    // return;
+  }
+
+  res.json({
+    feedback,
+  });
+});
 module.exports = {
   addUser,
   login,
+  sendfeedback
 };
