@@ -51,7 +51,7 @@ const login = asyncHandler(async (req, res) => {
     res.json({
       cust_id: user.cust_id,
       loginId: user.loginId,
-      custType: user.name,
+      custType: user.custType,
       email: user.email,
       pwd: user.password,
       loginStatus: user.loginStatus,
