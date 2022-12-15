@@ -92,8 +92,18 @@ const sendfeedback = asyncHandler(async (req, res) => {
     feedback,
   });
 });
+const getfeedback = asyncHandler(async (req, res) => {
+  try {
+    const doctorName = "Kate";
+    const feedback = await Feedback.find({ doctorName });
+    res.send(feedback);
+  } catch (err) {
+    console.log(err.response.data);
+  }
+});
 module.exports = {
   addUser,
   login,
-  sendfeedback
+  sendfeedback,
+  getfeedback
 };
